@@ -1,6 +1,9 @@
 :root {
     --linkedin: hsl(189 100% 50%);
     --github: hsl(0 0% 90%);
+    --languages: hsl(71 100% 50%);
+    --frameworks: hsl(225 100% 50%);
+    --softskills: hsl(317 100% 50%);
 }
 
 ::-webkit-scrollbar {
@@ -57,6 +60,18 @@ html {
     overflow: hidden;
     font-size: 3vmin;
     text-transform: none;
+}
+.languages {
+    color: var(--languages);
+    text-shadow: 0 0 0.125em hsl(0 0% 100%/ 0.25), 0 0 0.45em var(--languages);
+}
+.frameworks {
+    color: var(--frameworks);
+    text-shadow: 0 0 0.125em hsl(0 0% 100%/ 0.25), 0 0 0.45em var(--frameworks);
+}
+.softskills {
+    color: var(--softskills);
+    text-shadow: 0 0 0.125em hsl(0 0% 100%/ 0.25), 0 0 0.5em var(--softskills);
 }
 .neon-button{
     
