@@ -1,0 +1,101 @@
+:root {
+    --linkedin: hsl(189 100% 50%);
+    --github: hsl(0 0% 90%);
+}
+
+::-webkit-scrollbar {
+    width: 0.75em;
+}
+::-webkit-scrollbar-track {
+    background: none;
+    border-radius: 100vw;
+    margin-block: .5em;
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(0 0% 700%);
+    border-radius: 100vw;
+    border: 0.05em solid hsl(0 0% 50%);
+}
+*
+{
+    margin: 0;
+    padding: 0;
+}
+html {
+    background: #000;
+}
+
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+
+.section
+{
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    height: 100vh;
+    
+    position: relative;
+    font-family: 'Cabin', sans-serif;
+    color: #ffeded;
+    text-transform: uppercase;
+    font-size: 7vmin;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.section > div > p
+{
+    inline-size: 70vh;
+    overflow: hidden;
+    font-size: 3vmin;
+    text-transform: none;
+}
+.neon-button{
+    
+    font-size: 3vmin;
+
+    text-transform: none;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    
+    border-radius: 0.25em;
+    padding: 0.25em 1em;
+    transition: all .1s ease-in;
+    
+}
+.linkedin{
+    color: var(--linkedin);
+    text-shadow: 0 0 0.125em hsl(0 0% 100%/ 0.25), 0 0 0.45em var(--linkedin);
+    border: 0.125em solid var(--linkedin);
+    box-shadow: inset 0 0 1em 0 var(--linkedin), 0 0 1em 0 var(--linkedin);
+}
+.github{
+    color: var(--github);
+    border: 0.125em solid var(--github);
+    text-shadow: 0 0 0.125em hsl(0 0% 100%/ 0.25), 0 0 0.45em var(--github);
+    box-shadow: inset 0 0 1em 0 var(--github), 0 0 1em 0 var(--github);
+}
+.linkedin:hover{
+    background-color: var(--linkedin);
+    color: #000;
+    text-shadow: 0   
+}
+.github:hover{
+    background-color: var(--github);
+    color: #000;
+    text-shadow: 0   
+}
+
+section:nth-child(odd)
+{
+    justify-content: flex-end;
+}
