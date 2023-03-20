@@ -61,18 +61,7 @@ html {
     font-size: 3vmin;
     text-transform: none;
 }
-.languages {
-    color: var(--languages);
-    text-shadow: 0 0 0.125em hsl(0 0% 100%/ 0.25), 0 0 0.45em var(--languages);
-}
-.frameworks {
-    color: var(--frameworks);
-    text-shadow: 0 0 0.125em hsl(0 0% 100%/ 0.25), 0 0 0.45em var(--frameworks);
-}
-.softskills {
-    color: var(--softskills);
-    text-shadow: 0 0 0.125em hsl(0 0% 100%/ 0.25), 0 0 0.5em var(--softskills);
-}
+
 .neon-button{
     
     font-size: 3vmin;

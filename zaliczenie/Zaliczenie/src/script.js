@@ -1,6 +1,8 @@
 import * as THREE from 'three'
 import * as dat from 'lil-gui'
 import gsap from 'gsap'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
+import {  TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 
 const gui = new dat.GUI()
 const parameters = {
@@ -18,10 +20,42 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 const textureLoader = new THREE.TextureLoader()
+const matcapTexture = textureLoader.load('textures/matcaps/7.png')
 const gradientTexture = textureLoader.load('/textures/gradients/3.jpg')
 gradientTexture.magFilter = THREE.NearestFilter
 const material = new THREE.MeshToonMaterial({color: parameters.materialColor, gradientMap: gradientTexture})
+const wordCloud = new THREE.Mesh()
+const fontLoader = new FontLoader()
+const fontMaterial = new THREE.MeshMatcapMaterial({matcap: matcapTexture})
+const skills = ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js', 'Git', 'Webpack','Three.js', 'GSAP', 'Jest', 'TypeScript', 'Vite', 'XSLT', 'SQL', 'Python', '.NET Core', 'Electron.js', 'Mobx' ]
+fontLoader.load(
+    'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json',
+    (font) => {
+        for (let i = 0; i < skills.length; i++) {
 
+        const textGeometry = new TextGeometry(
+            skills[i],
+            {
+                font: font,
+                size: 0.06,
+                height: 0.01,
+                curveSegments: 5,
+                bevelEnabled: false,
+                bevelThickness: 0.03,
+                bevelSize: 0.02,
+                bevelOffset: 0, 
+                bevelSegments: 4
+            }
+        )
+            const textMesh = new THREE.Mesh(textGeometry, fontMaterial)
+            textMesh.position.x = (Math.random() - 0.5) *1.5
+            textMesh.position.y = (Math.random() - 0.5) *1.5
+            textMesh.position.z = (Math.random() - 0.5) *1.5
+            wordCloud.add(textMesh)
+        }
+        
+    }
+)
 const objectDistance = 4
 
 const TorusMesh = new THREE.Mesh(
@@ -32,19 +66,24 @@ const ConeMesh = new THREE.Mesh(
     new THREE.ConeGeometry(1, 2, 32),
     material
 )
+
+// const wordCloud = new THREE.Mesh(
+
 const TorusKnotMesh = new THREE.Mesh(
     new THREE.TorusKnotGeometry(0.8, 0.35, 100, 16),
     material
 )
-ConeMesh.position.y = - objectDistance * 1
+wordCloud.position.y = - objectDistance * 1
+ConeMesh.position.y = objectDistance * 1
 TorusKnotMesh.position.y = - objectDistance * 2
 
 TorusMesh.position.x = 2
+wordCloud.position.x = -2
 ConeMesh.position.x = -2
 TorusKnotMesh.position.x = 2
-scene.add(TorusMesh, ConeMesh, TorusKnotMesh)
+scene.add(TorusMesh, wordCloud, TorusKnotMesh)
 
-const sectionMeshes = [TorusMesh, ConeMesh, TorusKnotMesh]
+const sectionMeshes = [TorusMesh,wordCloud, TorusKnotMesh]
 
 
 const particlesCount = 200
@@ -153,6 +192,11 @@ const tick = () =>
     for (const mesh of sectionMeshes) {
         mesh.rotation.y += deltaTime * 0.1
         mesh.rotation.x += deltaTime * 0.12
+    }
+    // wordCloud.rotation.y += deltaTime * 0.1
+    // wordCloud.rotation.x += deltaTime * 0.12
+    for (const mesh of wordCloud.children) {
+        mesh.lookAt(camera.position)
     }
 
     // Render
